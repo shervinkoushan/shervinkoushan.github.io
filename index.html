@@ -1,61 +1,965 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-  <meta name="google-site-verification" content="bCE9jTIGHX0WwITaFtDTyREnvMD_s0bmG_UW7AwvrXE" />
-</head>
-<body>
-<h1>AnyTracker privacy policy</h1>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<h2>About</h2>
-  <p>
-Shervin Koushan built the AnyTracker app as a free app. This SERVICE is provided by Shervin Koushan at no cost and is intended for use as is.
+    <title>AppBlock — App Usage Hard Stop</title>
+    <meta
+      name="description"
+      content="Set a daily limit. When time is up, the app is blocked. No extensions. No snooze. No exceptions. AppBlock enforces strict Screen Time limits using Apple APIs."
+    />
 
-This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
+    <!-- Apple Smart App Banner -->
+    <meta name="apple-itunes-app" content="app-id=6757147703" />
 
-If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+    <!-- Open Graph -->
+    <meta property="og:title" content="AppBlock — App Usage Hard Stop" />
+    <meta
+      property="og:description"
+      content="Strict Screen Time Limits. True hard stops. No override buttons. On-device only."
+    />
+    <meta property="og:type" content="website" />
+    <!-- Optional: add an image hosted at /og.png -->
+    <meta property="og:image" content="og.png" />
 
-Information Collection and Use
-For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to your account login-information. This information is not sent to any server that we operate. Your data is safely stored on your device. 
+    <link rel="icon" href="favicon.ico" />
 
-The app does use third party services that may collect information used to identify you.
+    <style>
+      :root {
+        --bg: #050608;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.08);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.65);
+        --muted2: rgba(255, 255, 255, 0.45);
+        --line: rgba(255, 255, 255, 0.12);
+        --accent: #ffffff;
+        --shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+        --radius: 18px;
+        --max: 1100px;
+      }
 
-Link to privacy policies of third party service providers used by the app:
+      * {
+        box-sizing: border-box;
+      }
 
-Facebook
+      html {
+        scroll-behavior: smooth;
+      }
 
-Google
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(
+            1100px 700px at 20% -10%,
+            rgba(255, 255, 255, 0.14),
+            rgba(255, 255, 255, 0) 50%
+          ),
+          radial-gradient(
+            900px 600px at 80% 0%,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0) 55%
+          ),
+          radial-gradient(
+            900px 600px at 50% 120%,
+            rgba(255, 255, 255, 0.10),
+            rgba(255, 255, 255, 0) 60%
+          ),
+          var(--bg);
+        color: var(--text);
+        line-height: 1.45;
+      }
 
-Cookies
-Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-This Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 22px;
+      }
 
-Service Providers
-We may employ third-party companies and individuals due to the following reasons:
+      /* Top Nav */
+      .nav {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        background: rgba(5, 6, 8, 0.6);
+        border-bottom: 1px solid var(--line);
+        z-index: 50;
+      }
 
-To facilitate our Service;
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        gap: 14px;
+      }
 
-To provide the Service on our behalf;
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 180px;
+      }
 
-To perform Service-related services; or
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
 
-To assist us in analyzing how our Service is used.
+      .brand strong {
+        font-size: 14.5px;
+        letter-spacing: -0.02em;
+      }
+      .brand span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted2);
+        margin-top: 1px;
+      }
 
-We want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 13px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-Security
-We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+      .nav-links a {
+        opacity: 0.9;
+      }
+      .nav-links a:hover {
+        opacity: 1;
+        color: var(--text);
+      }
 
-Links to Other Sites
-This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+      .cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-end;
+        min-width: 220px;
+      }
 
-Children’s Privacy
-These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-size: 13px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        user-select: none;
+      }
 
-Changes to This Privacy Policy
-We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.09);
+        border-color: rgba(255, 255, 255, 0.18);
+        transform: translateY(-1px);
+      }
 
-Contact Us
-If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at shervin.koushan.dev@gmail.com</p>
-</body>
+      .btn.primary {
+        background: rgba(255, 255, 255, 0.92);
+        color: #0a0a0a;
+        border-color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+      }
+      .btn.primary:hover {
+        background: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      /* Hero */
+      .hero {
+        padding: 58px 0 34px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .kicker b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      h1 {
+        margin: 16px 0 12px;
+        font-size: clamp(34px, 4.2vw, 52px);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .lead {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 16px;
+        max-width: 56ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .subnote {
+        margin-top: 14px;
+        font-size: 12.5px;
+        color: var(--muted2);
+      }
+
+      .phone {
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        position: relative;
+        min-height: 360px;
+      }
+
+      .phone-inner {
+        padding: 18px;
+      }
+
+      .mock-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted2);
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+
+      .mock-card {
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 14px;
+      }
+
+      .mock-title {
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        margin: 0 0 6px;
+      }
+
+      .mock-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .pill {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      /* Sections */
+      section {
+        padding: 44px 0;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+      }
+
+      .section-title p {
+        margin: 0;
+        color: var(--muted2);
+        font-size: 13px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 16px;
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 6px;
+        letter-spacing: -0.01em;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 14px;
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .num {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        display: grid;
+        place-items: center;
+        color: var(--text);
+        font-weight: 650;
+        font-size: 13px;
+      }
+
+      .step b {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .step span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .quote {
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+        padding: 18px;
+      }
+
+      .quote p {
+        margin: 0 0 10px;
+        color: var(--text);
+        font-size: 14.5px;
+      }
+
+      .quote small {
+        color: var(--muted2);
+      }
+
+      /* Pricing */
+      .pricing {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .price-card {
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 18px;
+      }
+
+      .price-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .price-top h3 {
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      .price-tag {
+        font-size: 12px;
+        color: var(--muted2);
+      }
+
+      .features {
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .features li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        flex: 0 0 auto;
+        margin-top: 2px;
+      }
+
+      /* FAQ */
+      details {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+      }
+
+      details + details {
+        margin-top: 10px;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      details p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 32px 0 40px;
+        border-top: 1px solid var(--line);
+        color: var(--muted2);
+        font-size: 13px;
+      }
+
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .foot a {
+        color: var(--muted);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .foot a:hover {
+        color: var(--text);
+        border-bottom-color: rgba(255, 255, 255, 0.35);
+      }
+
+      /* Responsive */
+      @media (max-width: 920px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .cta {
+          min-width: unset;
+        }
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .split {
+          grid-template-columns: 1fr;
+        }
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .nav-links {
+          display: none;
+        }
+        .brand {
+          min-width: unset;
+        }
+        .cta {
+          gap: 8px;
+        }
+        .btn {
+          padding: 10px 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <header class="nav">
+      <div class="wrap">
+        <div class="nav-inner">
+          <a class="brand" href="#top" aria-label="AppBlock home">
+            <div class="logo">A</div>
+            <div>
+              <strong>AppBlock</strong>
+              <span>App Usage Hard Stop</span>
+            </div>
+          </a>
+
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <div class="cta">
+            <button class="btn" id="copyLinkBtn" type="button">Copy link</button>
+            <a
+              class="btn primary"
+              href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+              target="_blank"
+              rel="noopener"
+            >
+              Download on App Store
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="top" class="wrap">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">
+              <b>Strict Screen Time Limits</b> · No snooze · No exceptions
+            </div>
+
+            <h1>Hard stops for app overuse.</h1>
+
+            <p class="lead">
+              Set a daily limit. When time is up, the app is blocked. No extensions. No override
+              buttons. AppBlock enforces strict boundaries using Apple Screen Time APIs.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="btn primary"
+                href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+                target="_blank"
+                rel="noopener"
+              >
+                Get AppBlock
+              </a>
+              <a class="btn" href="#how">See how it works</a>
+            </div>
+
+            <div class="subnote">
+              Built for iPhone and iPad · iOS 16+ · On-device only · No accounts
+            </div>
+          </div>
+
+          <!-- Simple on-page mock preview (no images needed) -->
+          <aside class="phone" aria-label="App preview">
+            <div class="phone-inner">
+              <div class="mock-top">
+                <span>Today</span>
+                <span class="pill">Hard Stop</span>
+              </div>
+
+              <div class="mock-card">
+                <p class="mock-title">Daily Limits</p>
+
+                <div class="mock-row">
+                  <div>
+                    <div style="font-weight: 600">Social</div>
+                    <div style="color: var(--muted2); font-size: 12px">30 min / day</div>
+                  </div>
+                  <div class="pill">Locked at limit</div>
+                </div>
+
+                <div class="mock-row">
+                  <div>
+                    <div style="font-weight: 600">YouTube</div>
+                    <div style="color: var(--muted2); font-size: 12px">20 min / day</div>
+                  </div>
+                  <div class="pill">No override</div>
+                </div>
+
+                <div class="mock-row">
+                  <div>
+                    <div style="font-weight: 600">Games</div>
+                    <div style="color: var(--muted2); font-size: 12px">10 min / day</div>
+                  </div>
+                  <div class="pill">Resets tomorrow</div>
+                </div>
+              </div>
+
+              <div style="height: 12px"></div>
+
+              <div class="quote">
+                <p>
+                  “If you want reminders or flexible limits, this app is not for you.”
+                </p>
+                <small>AppBlock is intentionally opinionated.</small>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features">
+        <div class="section-title">
+          <h2>What makes AppBlock different</h2>
+          <p>Designed to remove loopholes.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <strong>True hard stops</strong>
+            <p>
+              Enforced daily limits using Apple Screen Time APIs—when time is up, access is blocked.
+            </p>
+          </div>
+          <div class="card">
+            <strong>No “Ignore for 15 minutes”</strong>
+            <p>
+              No snooze, no grace period, no override buttons. Limits stay in effect until reset.
+            </p>
+          </div>
+          <div class="card">
+            <strong>Minimal & fast setup</strong>
+            <p>
+              Pick apps (or categories), set a daily limit, done. Clean UI, no complexity.
+            </p>
+          </div>
+          <div class="card">
+            <strong>On-device only</strong>
+            <p>
+              No accounts, no tracking. Your usage decisions stay on your device.
+            </p>
+          </div>
+          <div class="card">
+            <strong>Break real habits</strong>
+            <p>
+              Ideal for reducing social media overuse and enforcing boundaries you actually keep.
+            </p>
+          </div>
+          <div class="card">
+            <strong>Opinionated by design</strong>
+            <p>
+              If you want flexible reminders, this is not the tool. This is a strict boundary setter.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how">
+        <div class="section-title">
+          <h2>How it works</h2>
+          <p>Three steps. No nonsense.</p>
+        </div>
+
+        <div class="split">
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <b>Select apps or categories</b>
+                <span>Choose exactly what you want to limit (social, video, games, etc.).</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <b>Set a daily time limit</b>
+                <span>Pick your boundary: 10 minutes, 30 minutes, 1 hour—whatever fits.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <b>Time’s up → it’s blocked</b>
+                <span>When the limit is reached, the app is blocked until the next reset.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <strong>Built for consistency</strong>
+            <p style="margin-top: 0.35rem">
+              AppBlock is designed to eliminate negotiation. You set the limit once, then the system
+              enforces it automatically.
+            </p>
+
+            <ul class="features" style="margin-top: 14px">
+              <li><span class="dot"></span> No extensions or “just this once”</li>
+              <li><span class="dot"></span> No soft reminders or popups</li>
+              <li><span class="dot"></span> No accounts, no sign-in</li>
+              <li><span class="dot"></span> Lightweight and private</li>
+            </ul>
+
+            <div style="margin-top: 16px">
+              <a
+                class="btn primary"
+                href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+                target="_blank"
+                rel="noopener"
+                style="width: 100%"
+              >
+                Download AppBlock
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section id="privacy">
+        <div class="section-title">
+          <h2>Privacy</h2>
+          <p>Simple and transparent.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <strong>Data not collected</strong>
+            <p>The app is designed to work without collecting personal data.</p>
+          </div>
+          <div class="card">
+            <strong>No accounts</strong>
+            <p>No registration, no login, no profile. Set limits and move on.</p>
+          </div>
+          <div class="card">
+            <strong>On-device enforcement</strong>
+            <p>Limits are applied locally using Apple’s Screen Time framework.</p>
+          </div>
+        </div>
+
+        <!-- Optional: link your privacy policy if you have one -->
+        <p style="margin-top: 14px; color: var(--muted2); font-size: 13px">
+          Tip: If you have a privacy policy URL, link it in the footer.
+        </p>
+      </section>
+
+      <!-- PRICING / IAP -->
+      <section id="pricing">
+        <div class="section-title">
+          <h2>Unlock options</h2>
+          <p>Simple, optional upgrades.</p>
+        </div>
+
+        <div class="pricing">
+          <div class="price-card">
+            <div class="price-top">
+              <h3>Free</h3>
+              <div class="price-tag">Start blocking today</div>
+            </div>
+            <ul class="features">
+              <li><span class="dot"></span> Set daily limits</li>
+              <li><span class="dot"></span> Hard stop enforcement</li>
+              <li><span class="dot"></span> Minimal setup</li>
+            </ul>
+          </div>
+
+          <div class="price-card" style="background: rgba(255, 255, 255, 0.07)">
+            <div class="price-top">
+              <h3>In-App Purchases</h3>
+              <div class="price-tag">Flexible upgrades</div>
+            </div>
+            <ul class="features">
+              <li><span class="dot"></span> Unblock one app or category</li>
+              <li><span class="dot"></span> Unblock all apps and categories</li>
+              <li><span class="dot"></span> AppBlock Pro options</li>
+            </ul>
+            <div style="margin-top: 14px">
+              <a
+                class="btn"
+                href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+                target="_blank"
+                rel="noopener"
+                style="width: 100%"
+              >
+                View on App Store
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="section-title">
+          <h2>FAQ</h2>
+          <p>Common questions.</p>
+        </div>
+
+        <details>
+          <summary>Does AppBlock have a snooze button or “ignore” option?</summary>
+          <p>
+            No. AppBlock is intentionally strict. When you hit the limit, access is blocked until the
+            next reset.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does it require an account?</summary>
+          <p>No. AppBlock works without sign-in and is designed to stay on-device.</p>
+        </details>
+
+        <details>
+          <summary>What iOS versions are supported?</summary>
+          <p>Requires iOS 16+ (and iPadOS 16+). Apple Silicon Macs can also run it via iOS app support.</p>
+        </details>
+
+        <details>
+          <summary>Is this the same as other “AppBlock” apps?</summary>
+          <p>
+            This page is for <b>AppBlock: App Usage Hard Stop</b> by <b>Shervin Koushan</b> on the App Store.
+          </p>
+        </details>
+
+        <details>
+          <summary>What is AppBlock best used for?</summary>
+          <p>
+            Social media limits, breaking scrolling habits, and enforcing hard boundaries—especially when you
+            want “no exceptions.”
+          </p>
+        </details>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section>
+        <div class="card" style="padding: 22px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap">
+            <div>
+              <strong style="font-size: 16px">Ready to make limits stick?</strong>
+              <p style="margin: 6px 0 0; color: var(--muted)">
+                Set the limit. When time is up, it’s done.
+              </p>
+            </div>
+            <a
+              class="btn primary"
+              href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+              target="_blank"
+              rel="noopener"
+            >
+              Download AppBlock
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>© <span id="year"></span> AppBlock</div>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap">
+            <!-- Replace these with real links when you have them -->
+            <a href="mailto:support@appblock.app">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a
+              href="https://apps.apple.com/us/app/appblock-app-usage-hard-stop/id6757147703"
+              target="_blank"
+              rel="noopener"
+            >
+              App Store
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Tiny helpers only (no frameworks)
+
+      // Current year in footer
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Copy link button
+      const copyBtn = document.getElementById("copyLinkBtn");
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          copyBtn.textContent = "Copied";
+          setTimeout(() => (copyBtn.textContent = "Copy link"), 1100);
+        } catch (e) {
+          // Fallback prompt
+          window.prompt("Copy this link:", window.location.href);
+        }
+      });
+    </script>
+  </body>
 </html>
